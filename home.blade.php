@@ -58,7 +58,7 @@
     <div class="row justify-content-between mb-4">
         <h2>Events</h2>
         <d class="d-flex">
-            <input type="date" id="search" class="form-control mr-3">
+            <input type="date" id="search" class="form-control mr-3" v-model='search'>
             <a href="{{ url('/manage') }}"><button class="btn btn-outline-primary">My Events</button></a>
         </d>
     </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="card-footer d-flex justify-content-around">
                             <button class="btn btn-outline-secondary" data-toggle='modal' @click='showSessionsModal(event.id)'>See Sessions</button>
-                            <button class="btn btn-outline-primary" data-toggle='modal' @click='showRegisterModal(event, event.id)'>Go to Registration</button>
+                            <button class="btn btn-outline-primary" data-toggle='modal' @click='showCreateRegistration(event, event.id)'>Go to Registration</button>
                         </div>
                     </div>
                 </div>
