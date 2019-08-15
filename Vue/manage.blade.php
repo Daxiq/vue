@@ -176,12 +176,14 @@
                         <table class="table">
                             <tbody>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Title</th>
                                     <th>Location</th>
                                     <th>Speaker</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr v-for="session in sessions">
+                                    <td>@{{session.event_id}}</td>
                                     <td>@{{session.title}}</td>
                                     <td>@{{session.room}}</td>
                                     <td>@{{session.speaker}}</td>
@@ -192,8 +194,39 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark">Add Session</button>
+                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" @click='showCreateSession(event.id)'>Add Session</button>
                     <button type="submit" class="btn btn-outline-primary">Add Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createSession">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form @submit.prevent='createSession'>
+                <div class="modal-header"><h2>Add Session</h2></div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <input class="form-control" id="event_id" type="text" v-model="createForm.event_id">
+                    </div>
+                    <div class="form-row">
+                        <label for="title">Title</label>
+                        <input class="form-control" id="title" type="text" v-model="createForm.title">
+                    </div>
+                    <div class="form-row">
+                        <label for="location">Location</label>
+                        <input class="form-control" id="room" type="text" v-model="createForm.location">
+                    </div>
+                    <div class="form-row">
+                        <label for="speaker">Speaker</label>
+                        <input class="form-control" id="speaker" type="text" v-model="createForm.speaker">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary">Add Session</button>
                 </div>
             </form>
         </div>
@@ -267,7 +300,7 @@
                     @else
                         <tr class="event" v-for='registration in registrations'>
                             <td class="event-title">
-                                <a href="#!" @click='showEventDetail(registration.event_id)'>@{{registration.title}}</a>
+                                <a href="#!" @click='showEventModal(registration.event_id)'>@{{registration.title}}</a>
                             </td>
                             <td class="event-date">@{{registration.date}}</td>
                             <td class="event-price">@{{registration.calculate_price}}</td>

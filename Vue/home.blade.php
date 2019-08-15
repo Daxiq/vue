@@ -5,7 +5,7 @@
 <div class="modal fade" id="registerEvent">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form @submit.prevent='registerEvent(event)'>
+            <form @submit.prevent='createRegistration'>
                 <div class="modal-header"><h2>Register for @{{event.title}}</h2></div>
                 <div class="modal-body">
                     <div class="form-body">
@@ -58,7 +58,7 @@
     <div class="row justify-content-between mb-4">
         <h2>Events</h2>
         <d class="d-flex">
-            <input type="date" id="search" class="form-control mr-3">
+            <input type="date" id="search" class="form-control mr-3" v-model='search'>
             <a href="{{ url('/manage') }}"><button class="btn btn-outline-primary">My Events</button></a>
         </d>
     </div>
@@ -70,13 +70,15 @@
                         <div class="card-header"><h4>@{{event.title}}</h4></div>
                         <div class="card-body">
                             <p>@{{event.description}}</p>
+                            <b>Sessions</b>
+                            <p>@{{event.name}}</p>
                             <p>On @{{event.date}} form @{{event.time}} for @{{event.duration_days}} day(s)</p>
                             <p>Meet at @{{event.location}}</p>
                             <p>Pay &#8381;@{{event.standard_price}}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-around">
                             <button class="btn btn-outline-secondary" data-toggle='modal' @click='showSessionsModal(event.id)'>See Sessions</button>
-                            <button class="btn btn-outline-primary" data-toggle='modal' @click='showRegisterModal(event, event.id)'>Go to Registration</button>
+                            <button class="btn btn-outline-primary" data-toggle='modal' @click='showCreateRegistration(event, event.id)'>Go to Registration</button>
                         </div>
                     </div>
                 </div>
